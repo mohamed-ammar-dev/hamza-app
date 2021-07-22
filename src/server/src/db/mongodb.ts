@@ -7,7 +7,6 @@ class MongoDB {
   constructor() {
     this.uncaughtException();
     this.connect();
-    new Index(this.db);
   }
 
   get db() {
@@ -17,6 +16,7 @@ class MongoDB {
   async connect() {
     this.client = new MongoClient(process.env.MONGODB_URL as string);
     await this.client.connect();
+    new Index(this.db);
     console.log("MongoDB connected...");
   }
 
