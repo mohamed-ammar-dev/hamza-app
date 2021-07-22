@@ -1,16 +1,15 @@
-import { account } from "../interfaces/Interfaces";
 import { Account } from "../models/accounts";
 import { getNow } from "../utils/date";
 
 export default class ProductService {
   static async getAccountByNumber(accountNumber: string) {
-    return await Account.findOne({
+    return await Account.find({
       accountNumber,
-    }).cache();
+    }).toArray();
   }
 
   static async getAccountByQuery(query: object) {
-    return await Account.find(query).sort({ date: -1 }).cache();
+    return await Account.find(query).sort({ date: -1 }).toArray();
   }
 
   static async getAccountByDate(start: Date, end: Date) {
@@ -19,22 +18,19 @@ export default class ProductService {
         $gte: start,
         $lt: end,
       },
-    }).cache();
+    }).toArray();
   }
 
   static async saveAccount(accountNumber: string, price: number) {
-    return await new Account({
+    return await Account.insertOne({
       accountNumber,
       price,
       date: getNow(),
-    }).save();
+    });
   }
 
-  static async updateAccount(Account: account, price: number) {
-    Account.date = getNow();
-    Account.price = price;
-
-    await Account.save();
+  static async updateAccount(accountNumber: string, price: number) {
+    await Account.updateOne({ accountNumber }, { date: getNow(), price });
   }
 
   static async deleteAccount(_id: string) {

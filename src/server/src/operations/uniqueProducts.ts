@@ -29,11 +29,10 @@ export class UniqueProducts {
     }
     return this.counterObj.overview;
   }
+
   saveAccount() {
     const overview = this.counterObj.overview;
-    if (overview.items != 0) {
-      let accountObj = new Account(this.accountNumber, overview.totalPrice);
-      accountObj.processing();
-    }
+    if (overview.items != 0)
+      new Account(this.accountNumber, overview.totalPrice);
   }
 }

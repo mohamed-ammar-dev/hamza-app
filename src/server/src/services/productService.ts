@@ -1,7 +1,6 @@
 import { Product } from "../models/products";
 import { getDate, getNow } from "../utils/date";
 import { product } from "../interfaces/Interfaces";
-import { aggregateHandle } from "../utils/aggregate";
 
 export default class ProductService {
   static async getAllProducts() {
@@ -16,6 +15,7 @@ export default class ProductService {
 
   static async getTodayProducts() {
     const [start, end] = getDate();
+
     const products = await Product.aggregate([
       {
         $match: {
@@ -32,7 +32,8 @@ export default class ProductService {
           items: { $sum: 1 },
         },
       },
-    ]);
+    ]).toArray();
+
     if (products.length == 0) products.push(this.setIntialCounter());
     return products[0];
   }
@@ -53,12 +54,10 @@ export default class ProductService {
           items: { $sum: 1 },
         },
       },
-    ]).cache();
+    ]).toArray();
 
-    const data = aggregateHandle(products);
-
-    if (data.length == 0) data.push(this.setIntialCounter());
-    return data[0];
+    if (products.length == 0) products.push(this.setIntialCounter());
+    return products[0];
   }
 
   static async getMoreInformationProducts() {
@@ -73,9 +72,9 @@ export default class ProductService {
           items: { $sum: 1 },
         },
       },
-    ]).cache();
+    ]).toArray();
 
-    return aggregateHandle(products);
+    return products;
   }
 
   static async updateProducts() {
@@ -83,11 +82,14 @@ export default class ProductService {
   }
 
   static async saveProduct(data: product, accountNumber: string) {
-    return await new Product({
-      ...data,
+    return await Product.insertOne({
+      productName: data.productName,
+      voucherCode: data.voucherCode,
+      productPrice: +data.productPrice,
       accountNumber,
       date: getNow(),
-    }).save();
+      isDownloaded: false,
+    });
   }
 
   static setIntialCounter(items = 0) {

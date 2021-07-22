@@ -1,6 +1,7 @@
+import "./db/mongodb";
+// import "./services/cache";
 import express, { Request, NextFunction } from "express";
 import morgan from "morgan";
-import "./services/cache";
 import { join } from "path";
 import AppError from "./utils/appError";
 import compression from "compression";

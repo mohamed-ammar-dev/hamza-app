@@ -11,7 +11,7 @@ export const getDate = (date?: string) => {
 };
 
 export const getNow = () => {
-  return new Date().toISOString();
+  return new Date();
 };
 
 export const formatAMPM = (date: string) => {

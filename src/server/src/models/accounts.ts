@@ -1,19 +1,3 @@
-import mongoose from "mongoose";
+import { db } from "../db/mongodb";
 
-const accountSchema = new mongoose.Schema({
-  accountNumber: {
-    type: Number,
-    required: true,
-  },
-  date: {
-    type: Date,
-    default: Date.now(),
-    required: true,
-  },
-  price: {
-    type: Number,
-    required: true,
-  },
-});
-
-export const Account = mongoose.model("Account", accountSchema);
+export const Account = db.collection("Account");
