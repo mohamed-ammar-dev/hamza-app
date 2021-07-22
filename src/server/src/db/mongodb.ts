@@ -15,10 +15,7 @@ class MongoDB {
   }
 
   async connect() {
-    this.client = new MongoClient(process.env.MONGODB_URL as string, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    this.client = new MongoClient(process.env.MONGODB_URL as string);
     await this.client.connect();
     console.log("MongoDB connected...");
   }
