@@ -4,6 +4,6 @@ export class Index {
   }
 
   create() {
-    this.db.collection("Account").createIndex({ date: -1 });
+    this.db.collection("accounts").createIndex({ date: -1 });
   }
 }
