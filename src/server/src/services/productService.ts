@@ -78,7 +78,10 @@ export default class ProductService {
   }
 
   static async updateProducts() {
-    await Product.updateMany({ isDownloaded: false }, { isDownloaded: true });
+    await Product.updateMany(
+      { isDownloaded: false },
+      { $set: { isDownloaded: true } }
+    );
   }
 
   static async saveProduct(data: product, accountNumber: string) {
