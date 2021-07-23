@@ -39,7 +39,7 @@ export default class ProductService {
   }
 
   static async getAllPendingProducts() {
-    return await Product.find({ isDownloaded: false });
+    return await Product.find({ isDownloaded: false }).toArray();
   }
 
   static async getPendingProducts() {

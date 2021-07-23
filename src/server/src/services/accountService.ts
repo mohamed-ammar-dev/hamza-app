@@ -9,9 +9,7 @@ export default class ProductService {
   }
 
   static async getAccountByQuery(query: object) {
-    const test = await Account.find(query).sort({ date: -1 }).toArray();
-    console.log(test);
-    return test;
+    return await Account.find(query).sort({ date: -1 }).toArray();
   }
 
   static async getAccountByDate(start: Date, end: Date) {
