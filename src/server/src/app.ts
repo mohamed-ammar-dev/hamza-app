@@ -3,11 +3,11 @@ import "./db/mongodb";
 import express, { Request, NextFunction } from "express";
 import morgan from "morgan";
 import { join } from "path";
-import AppError from "./utils/appError";
 import compression from "compression";
 import routerProducts from "./routers/products";
 import routerAccounts from "./routers/accounts";
 import routerViews from "./routers/views";
+import AppError from "./utils/appError";
 import globalErrorHandler from "./controllers/error.controller";
 export const app = express();
 
