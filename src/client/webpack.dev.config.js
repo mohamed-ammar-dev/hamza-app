@@ -2,15 +2,19 @@ const path = require("path");
 const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
-  entry: "./src/client/src/home/app.ts",
+  entry: {
+    home:"./src/client/src/home/app.ts",
+  login:'./src/client/src/login/app.ts'},
+  
   output: {
-    filename: "bundle.js",
+    filename: "[name].js",
     path: path.resolve(__dirname, "build"),
     publicPath: "build/",
   },
   mode: "development",
   devtool: "inline-source-map",
   module: {
+   
     rules: [
       {
         test: /\.ts$/,
@@ -18,12 +22,12 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: /\.(png)$/,
+        test: /\.(png | svg)$/,
         loader: "image-webpack-loader",
         enforce: "pre",
       },
       {
-        test: /\.(png|mp3)$/,
+        test: /\.(png|mp3|svg)$/,
         loader: "url-loader",
         options: {
           // Images larger than 25 KB won’t be inlined
@@ -34,6 +38,6 @@ module.exports = {
   },
   plugins: [new TerserPlugin()],
   resolve: {
-    extensions: [".ts", ".js", ".png"],
+    extensions: [".ts", ".js", ".png", "mp3", "svg"],
   },
 };

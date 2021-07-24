@@ -4,6 +4,7 @@ import catchAsync from "../utils/catchAsync";
 
 const views = Router();
 
-views.get("/", catchAsync(ViewsController.renderHome));
+views.get("/", catchAsync(ViewsController.renderLogin));
+views.get("/home", catchAsync(ViewsController.renderHome));
 
 export default views;

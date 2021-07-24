@@ -1,7 +1,10 @@
 import { Request, Response } from "express";
 
-export default class Product {
+export default class Views {
   static async renderHome(_: Request, response: Response) {
     response.render("home.hbs");
+  }
+  static async renderLogin(_: Request, response: Response) {
+    response.render("login.hbs");
   }
 }

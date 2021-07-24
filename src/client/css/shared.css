@@ -1,0 +1,50 @@
+@font-face {
+  font-family: "Roboto";
+  font-weight: normal;
+  src: url("../font/roboto-regular.ttf");
+}
+
+@font-face {
+  font-family: "Roboto";
+  font-weight: 300;
+  src: url("../font/roboto-light.ttf");
+}
+
+:root {
+  --blocks: #9993fd;
+  --mainText: #21364b;
+  --shadow: #edf2f5;
+  --white: #f8fafb;
+  --black: #21364b;
+  --background: #8b85ff;
+  --red: #cc0000;
+  --redBg: #a30000;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  line-height: 1.5;
+}
+
+.btn {
+  font-size: 1.2rem;
+  border-radius: 0.25rem;
+  padding: 0 2rem;
+  font-family: inherit;
+  height: 3.3rem;
+  align-self: center;
+  border: none;
+  cursor: pointer;
+  -webkit-animation: wiggle 300ms 2s 3;
+  animation: wiggle 300ms 2s 3;
+  box-shadow: 1px 1px 1px 2px var(--shadow);
+  width: 100%;
+}
