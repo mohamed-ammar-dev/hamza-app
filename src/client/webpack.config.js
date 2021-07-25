@@ -8,10 +8,11 @@ module.exports = {
   },
 
   output: {
-    filename: "bundle.js",
+    filename: "[name].js",
     path: path.resolve(__dirname, "build"),
     publicPath: "build/",
   },
+
   mode: "production",
   optimization: {
     splitChunks: {
@@ -43,6 +44,6 @@ module.exports = {
   },
   plugins: [new TerserPlugin()],
   resolve: {
-    extensions: [".ts", ".js", ".png", ".svg", ".mp3"],
+    extensions: [".ts", ".js"],
   },
 };
