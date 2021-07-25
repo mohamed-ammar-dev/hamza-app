@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import { Account } from "../models/accounts";
 import { getNow } from "../utils/date";
 
@@ -30,10 +31,13 @@ export default class ProductService {
   }
 
   static async updateAccount(accountNumber: string, price: number) {
-    await Account.updateOne({ accountNumber }, { date: getNow(), price });
+    await Account.updateOne(
+      { accountNumber },
+      { $set: { date: getNow(), price } }
+    );
   }
 
   static async deleteAccount(_id: string) {
-    await Account.findByIdAndDelete(_id);
+    await Account.deleteOne({ _id: new ObjectId(_id) });
   }
 }

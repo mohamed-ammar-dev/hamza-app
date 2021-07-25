@@ -3,9 +3,10 @@ const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
   entry: {
-    home:"./src/client/src/home/app.ts",
-  login:'./src/client/src/login/app.ts'},
-  
+    home: "./src/client/src/home/app.ts",
+    login: "./src/client/src/login/app.ts",
+  },
+
   output: {
     filename: "[name].js",
     path: path.resolve(__dirname, "build"),
@@ -14,7 +15,6 @@ module.exports = {
   mode: "development",
   devtool: "inline-source-map",
   module: {
-   
     rules: [
       {
         test: /\.ts$/,
@@ -22,7 +22,7 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: /\.(png | svg)$/,
+        test: /\.(png|svg)$/,
         loader: "image-webpack-loader",
         enforce: "pre",
       },
@@ -38,6 +38,6 @@ module.exports = {
   },
   plugins: [new TerserPlugin()],
   resolve: {
-    extensions: [".ts", ".js", ".png", "mp3", "svg"],
+    extensions: [".ts", ".js"],
   },
 };

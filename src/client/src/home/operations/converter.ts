@@ -9,7 +9,7 @@ export class Converter extends Template {
   private accountId: HTMLInputElement;
 
   constructor() {
-    super(document.querySelector(".convert-button")!);
+    super(document.querySelector(".convert-section .btn")!);
     this.textArea = document.querySelector(".convert-textarea")!;
     this.accountId = document.querySelector("#account-id")!;
   }
@@ -69,7 +69,7 @@ export class Converter extends Template {
 
       data[accountNumber].push({
         productName,
-        voucherCode: voucherCode[i].replace("Code: ", "").replace("\t", ""),
+        voucherCode: voucherCode[i].substring(6),
         productPrice: price.replace("$", ""),
       });
     }
