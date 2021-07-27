@@ -12,10 +12,14 @@ export class Joi {
   private static instance: Joi;
   saveProductsSchema: ArraySchema;
   accountsQuerySchema: ObjectSchema;
+  signUpSchema: ObjectSchema;
+  loginSchema: ObjectSchema;
 
   private constructor() {
     this.saveProductsSchema = this.saveProducts();
     this.accountsQuerySchema = this.accountsQuery();
+    this.signUpSchema = this.signUp();
+    this.loginSchema = this.login();
   }
 
   public static getInstance(): Joi {
@@ -23,6 +27,34 @@ export class Joi {
       Joi.instance = new Joi();
     }
     return Joi.instance;
+  }
+
+  private signUp() {
+    return object({
+      username: string().alphanum().min(3).max(30).required(),
+
+      email: string()
+        .email({
+          minDomainSegments: 2,
+          tlds: { allow: ["com", "net"] },
+        })
+        .required(),
+
+      password: string().min(6).max(30).required(),
+    });
+  }
+
+  private login() {
+    return object({
+      email: string()
+        .email({
+          minDomainSegments: 2,
+          tlds: { allow: ["com", "net"] },
+        })
+        .required(),
+
+      password: string().min(6).max(30).required(),
+    });
   }
 
   private saveProducts() {

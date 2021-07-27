@@ -6,7 +6,7 @@ export class Search extends Template {
   input: HTMLInputElement;
 
   constructor() {
-    super(document.querySelector(".account-id img")! as HTMLButtonElement);
+    super(document.querySelector("#search-icon")! as HTMLButtonElement);
     this.input = document.querySelector("#account-id")!;
     this.keyboardListener();
   }

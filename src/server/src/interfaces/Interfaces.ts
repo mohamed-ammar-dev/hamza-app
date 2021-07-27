@@ -30,3 +30,14 @@ export type error = AppError & {
   errors: object;
   statusCode: number;
 };
+
+export enum ROLE {
+  ADMIN = "admin",
+  USER = "user",
+}
+
+export enum MODEL {
+  PRODUCT = "products",
+  ACCOUNT = "accounts",
+  USER = "users",
+}

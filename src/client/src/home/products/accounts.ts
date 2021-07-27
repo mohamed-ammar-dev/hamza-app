@@ -2,7 +2,7 @@ import { Template } from "./template";
 
 export class Accounts extends Template {
   constructor() {
-    super(document.querySelector(".accounts-label")! as HTMLButtonElement);
+    super(document.querySelector("#account-icon")! as HTMLButtonElement);
   }
 
   async request() {

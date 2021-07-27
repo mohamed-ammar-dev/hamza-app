@@ -23,7 +23,7 @@ export class Converter extends Template {
   }
 
   async request(data: converter) {
-    const url = "/upload-data";
+    const url = "/products/upload";
     const response = await fetch(url, {
       method: "POST",
       body: JSON.stringify(data),

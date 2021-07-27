@@ -6,6 +6,7 @@ import Price from "../../../images/price.png";
 import Search from "../../../images/search.png";
 import Time from "../../../images/time.png";
 import Today from "../../../images/today.png";
+import Account from "../../../images/account.png";
 
 export class Images {
   private search: HTMLImageElement;
@@ -16,6 +17,7 @@ export class Images {
   private price: NodeListOf<HTMLImageElement>;
   private cart: NodeListOf<HTMLImageElement>;
   private link: HTMLLinkElement;
+  private account: HTMLImageElement;
 
   constructor() {
     this.search = document.querySelector("#search-icon")!;
@@ -25,18 +27,20 @@ export class Images {
     this.info = document.querySelector(".more-info-image")!;
     this.price = document.querySelectorAll("#price-icon")!;
     this.cart = document.querySelectorAll("#cart-icon")!;
+    this.account = document.querySelector("#account-icon")!;
     this.link = document.querySelector("link[rel~='icon']")!;
   }
 
   render() {
-    this.addsearchIcon();
+    this.addFavIcon();
+    this.addAccountIcon();
+    this.addSearchIcon();
     this.addTodayIcon();
     this.addTimeIcon();
     this.addDownloadIcon();
     this.addInfoIcon();
     this.addCartIcon();
     this.addPriceIcon();
-    this.addFavIcon();
   }
 
   private addFavIcon() {
@@ -47,8 +51,12 @@ export class Images {
     this.link.href = FavIcon;
   }
 
-  private addsearchIcon() {
+  private addSearchIcon() {
     this.search.src = Search;
+  }
+
+  private addAccountIcon() {
+    this.account.src = Account;
   }
 
   private addTodayIcon() {

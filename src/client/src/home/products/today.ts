@@ -2,7 +2,7 @@ import { Template } from "./template";
 
 export class TodayProducts extends Template {
   async request() {
-    const url = "today-products";
+    const url = "/products/today";
     const response = await fetch(url);
     return response;
   }

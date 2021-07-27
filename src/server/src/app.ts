@@ -1,9 +1,10 @@
 import "./db/mongodb";
-// import "./services/cache";
+import "./db/redis";
 import express, { Request, NextFunction } from "express";
 import morgan from "morgan";
 import { join } from "path";
 import compression from "compression";
+import routerAuthentication from "./routers/authentication";
 import routerProducts from "./routers/products";
 import routerAccounts from "./routers/accounts";
 import routerViews from "./routers/views";
@@ -25,8 +26,9 @@ if (process.env.NODE_ENV === "development") {
 }
 
 app.use(routerViews);
-app.use(routerProducts);
-app.use(routerAccounts);
+app.use("/auth", routerAuthentication);
+app.use("/products", routerProducts);
+app.use("/accounts", routerAccounts);
 
 app.all("*", (req: Request, _, next: NextFunction) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));

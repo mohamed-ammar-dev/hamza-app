@@ -2,7 +2,7 @@ import { Template } from "./template";
 
 export class PendingProducts extends Template {
   async request() {
-    const url = "pending-products";
+    const url = "/products/pending";
     const response = await fetch(url);
     return response;
   }

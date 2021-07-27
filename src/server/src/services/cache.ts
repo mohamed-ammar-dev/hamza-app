@@ -1,47 +1,12 @@
-import { createClient } from "redis";
+import { redis } from "../db/redis";
 import { promisify } from "util";
 
-class Redis {
-  connect() {
-    const client = createClient({
-      host: process.env.REDIS_URL,
-      port: process.env.REDIS_PORT,
-      password: process.env.REDIS_PASSWORD,
-    });
-    client.flushall();
-    console.log("Redis connected...");
-    return client;
-  }
+redis.hget = promisify(redis.hget);
+
+export function saveToken(user, token) {
+  redis.hset(user._id, token, JSON.stringify(user), "EX", 60 * 60 * 1000 * 2);
 }
 
-const redis = new Redis();
-const client = redis.connect();
-
-client.get = promisify(client.get);
-
-export async function cache(queryObj, query, collectionName) {
-  const key = JSON.stringify(
-    Object.assign({}, query, {
-      collection: collectionName,
-    })
-  );
-
-  const cacheValue = await client.get(key);
-
-  if (cacheValue) {
-    const doc = JSON.parse(cacheValue);
-
-    console.log("running from cache");
-
-    return doc;
-  }
-
-  const result = await queryObj;
-
-  client.set(key, JSON.stringify(result));
-  console.log("running from DB");
-
-  return result;
+export async function getUserByToken(user_id, token) {
+  return await redis.hget(user_id, token);
 }
-
-export const cleanCache = () => client.flushall();

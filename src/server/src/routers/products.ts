@@ -4,22 +4,19 @@ import catchAsync from "../utils/catchAsync";
 
 const products = Router();
 
-products.post("/upload-data", catchAsync(ProductController.saveUniqueProducts));
+products.post("/upload", catchAsync(ProductController.saveUniqueProducts));
 
-products.get("/today-products", catchAsync(ProductController.getTodayProducts));
+products.get("/today", catchAsync(ProductController.getTodayProducts));
 
-products.get(
-  "/pending-products",
-  catchAsync(ProductController.getPendingProducts)
-);
+products.get("/pending", catchAsync(ProductController.getPendingProducts));
 
 products.get(
-  "/pending-more-info",
+  "/pending/more-info",
   catchAsync(ProductController.moreInformationProducts)
 );
 
 products.get(
-  "/download-pending-products",
+  "/pending/download",
   catchAsync(ProductController.downloadPendingProducts)
 );
 

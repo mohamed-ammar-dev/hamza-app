@@ -6,7 +6,7 @@ export class MoreInformation extends Template {
   }
 
   async request() {
-    const url = "/pending-more-info";
+    const url = "/products/pending/more-info";
     const response = await fetch(url);
     return response;
   }

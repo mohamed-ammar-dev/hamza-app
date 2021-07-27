@@ -9,7 +9,7 @@ export class Download extends Template {
   preRequest() {}
 
   async request() {
-    const url = "/download-pending-products";
+    const url = "/products/pending/download";
     const response = await fetch(url);
     return response;
   }

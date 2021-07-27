@@ -1,6 +1,6 @@
 import { validateRespone } from "../../utils/validator";
 import { converter } from "../interfaces/interfaces";
-import { Notifications } from "../notifications/notifications";
+import { Notifications } from "../../utils/notifications";
 
 export abstract class Template extends Notifications {
   constructor(private button: HTMLButtonElement) {

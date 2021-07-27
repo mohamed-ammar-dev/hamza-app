@@ -1,5 +1,5 @@
-import SoundNotification from "../../../audio/notification.mp3";
-import SoundError from "../../../audio/error.mp3";
+import SoundNotification from "../../audio/notification.mp3";
+import SoundError from "../../audio/error.mp3";
 
 export class Notifications {
   private msgContent: HTMLStyleElement;

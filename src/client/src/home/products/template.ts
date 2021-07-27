@@ -1,7 +1,7 @@
 import { Display } from "../display/factory";
 import { validateRespone } from "../../utils/validator";
 import { displayObject } from "../interfaces/interfaces";
-import { Notifications } from "../notifications/notifications";
+import { Notifications } from "../../utils/notifications";
 
 export abstract class Template {
   displayFactory: Display;

@@ -12,13 +12,15 @@
 
 :root {
   --blocks: #9993fd;
-  --mainText: #21364b;
+  --mainText: #575a89;
   --shadow: #edf2f5;
   --white: #f8fafb;
   --black: #21364b;
   --background: #8b85ff;
-  --red: #cc0000;
+  --red: #c33625;
   --redBg: #a30000;
+  --grayishBlue: #a3a5ae;
+  --varyDarkBlue: hsl(234, 12%, 34%);
 }
 
 * {
@@ -34,6 +36,13 @@ body {
   line-height: 1.5;
 }
 
+img {
+  width: 24px;
+  height: 24px;
+  align-self: center;
+  justify-self: center;
+}
+
 .btn {
   font-size: 1.2rem;
   border-radius: 0.25rem;
@@ -47,4 +56,131 @@ body {
   animation: wiggle 300ms 2s 3;
   box-shadow: 1px 1px 1px 2px var(--shadow);
   width: 100%;
+}
+
+/* Notification Start */
+.msgbox-area {
+  max-height: 100%;
+  position: fixed;
+  bottom: 15px;
+  left: 20px;
+  right: 20px;
+}
+.msgbox-area .msgbox-box {
+  font-size: 1rem;
+  color: var(--mainText);
+  background-color: var(--shadow);
+  border: none;
+  padding: 18px 20px;
+  margin: 0 0 15px;
+  display: none;
+  align-items: center;
+  position: relative;
+  border-radius: 7px;
+  box-shadow: 0 1px 1px var(--shadow);
+  -webkit-animation: slideInFromRight 2000ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  animation: slideInFromRight 2000ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  justify-content: space-between;
+}
+.msgbox-area .msgbox-box.msgbox-box-open {
+  display: flex;
+}
+.msgbox-area .msgbox-box:last-child {
+  margin: 0;
+}
+.msgbox-area .msgbox-content {
+  flex-shrink: 1;
+  font-size: 1rem;
+}
+.msgbox-area .msgbox-close {
+  color: var(--background);
+  text-decoration: none;
+  margin: 0 0 0 20px;
+  flex-grow: 0;
+  flex-shrink: 0;
+  position: relative;
+  transition: text-shadow 225ms ease-out;
+  font-size: 1rem;
+  border: none !important;
+  cursor: pointer;
+}
+
+.msgbox-area .red {
+  color: var(--red);
+  background-color: #ffd9d9;
+  border: #de7575 solid 1px;
+}
+
+.msgbox-area .green {
+  color: #4ca1a3;
+  font-size: 1.1rem;
+}
+
+.msgbox-area .numbers {
+  color: var(--background);
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+  .msgbox-area {
+    left: 80px;
+    right: 80px;
+  }
+}
+@media (min-width: 768px) {
+  .msgbox-area {
+    width: 480px;
+    height: 0;
+    top: 15px;
+    left: auto;
+    right: 15px;
+  }
+}
+/*Notification End */
+
+@-webkit-keyframes wiggle {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  33% {
+    transform: rotateZ(-10deg);
+  }
+  66% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(10deg);
+  }
+}
+
+@keyframes wiggle {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  33% {
+    transform: rotateZ(-10deg);
+  }
+  66% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(10deg);
+  }
+}
+
+@-webkit-keyframes slideInFromRight {
+  0% {
+    transform: translateX(+100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(+100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }

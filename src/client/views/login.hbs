@@ -19,52 +19,52 @@
       <div class="svg">
         <img alt="Image" id="svg" />
       </div>
-      <div class="container">
-        <div>
 
-          <div class="contents">
-            <div>
-              <div>
-                <div>
-                  <h3>Sign In</h3>
-                  <p>Hamza app helps you insert your specific pattern of data and connect it by google spreadsheet.</p>
-                </div>
-                <form action="#" method="post">
-                  <div class="form-group first">
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="username"
-                      placeholder="Username"
-                    />
+      <div class="contents">
 
-                  </div>
-                  <div class="form-group last">
-                    <input
-                      type="password"
-                      class="form-control"
-                      id="password"
-                      placeholder="Password"
-                    />
-
-                  </div>
-
-                  <input type="submit" value="Log In" class="btn" />
-
-                  <div class="forgot-pass">
-                    <span><a href="#">Forgotten Password?</a></span>
-                  </div>
-
-                </form>
-              </div>
-            </div>
+        <h3>Sign In</h3>
+        <p>Hamza app helps you insert your specific pattern of data and connect
+          it by google spreadsheet.</p>
+        <form>
+          <div class="form-group first">
+            <img id="user-icon"/>
+            <input
+              type="email"
+              class="form-control"
+              id="username"
+              placeholder="Username"
+            />
 
           </div>
+          <div class="form-group last">
+            <img id="lock-icon"/>
 
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              placeholder="Password"
+            />
+
+          </div>
+        </form>
+        <input type="button" value="Log In" class="btn" />
+
+        <div class="forgot-pass">
+          <span><a href="#">Forgotten Password?</a></span>
         </div>
+
       </div>
     </div>
-        <script type="module" src="../build/login.js"></script>
+    <div id="msgbox-area" class="msgbox-area">
+      <div class="msgbox-box red">
+        <div class="msgbox-content">
+        </div>
+        <a class="msgbox-close">CLOSE</a>
+      </div>
+    </div>
+
+    <script type="module" src="../build/login.js"></script>
 
   </body>
 </html>
