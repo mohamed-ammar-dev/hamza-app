@@ -35,6 +35,13 @@ export default class Authntication {
 
     saveToken(user, token);
 
+    response.cookie("token", token, {
+      signed: true,
+      maxAge: 60 * 60 * 1000 * 2,
+      httpOnly: true,
+    });
+    response.cookie("logged_in", "yes", { maxAge: 60 * 60 * 1000 * 2 });
+
     response.send({ token });
   }
 }

@@ -7,6 +7,8 @@ import { Search } from "./operations/search";
 import { Download } from "./operations/download";
 import { Converter } from "./operations/converter";
 
+if (!document.cookie) document.location.href = "/";
+
 new Images().render();
 
 Promise.all([new TodayProducts().run(), new PendingProducts().run()]);

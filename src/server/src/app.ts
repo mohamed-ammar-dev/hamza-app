@@ -1,6 +1,7 @@
 import "./db/mongodb";
 import "./db/redis";
-import express, { Request, NextFunction } from "express";
+import express, { Request, NextFunction, json } from "express";
+import cookieParser from "cookie-parser";
 import morgan from "morgan";
 import { join } from "path";
 import compression from "compression";
@@ -18,7 +19,8 @@ app.set("views", join(clientPath, "views"));
 
 app.use(compression());
 app.use(express.static(clientPath));
-app.use(express.json({ limit: "10kb" }));
+app.use(json({ limit: "10kb" }));
+app.use(cookieParser(process.env.COOKIE_SECRET));
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));

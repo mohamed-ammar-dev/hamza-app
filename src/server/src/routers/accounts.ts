@@ -8,6 +8,6 @@ const accounts = Router();
 accounts
   .route("/")
   .get(catchAsync(auth), catchAsync(AccountController.getAccounts))
-  .delete(catchAsync(AccountController.deleteAccount));
+  .delete(catchAsync(auth), catchAsync(AccountController.deleteAccount));
 
 export default accounts;

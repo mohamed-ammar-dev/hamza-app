@@ -3,7 +3,7 @@ import { getUserByToken } from "../services/cache";
 import AppError from "../utils/appError";
 
 const auth = async (request, _, next) => {
-  const token = request.header("Authorization");
+  const token = request.signedCookies.token;
 
   if (!token) throw new AppError("Invalid token. Please log in again!", 401);
 
