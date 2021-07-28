@@ -7,7 +7,7 @@ import { Joi } from "../utils/joi";
 
 export default class Product {
   static async saveUniqueProducts(
-    request: Request,
+    request,
     response: Response,
     _: NextFunction
   ) {
@@ -17,7 +17,11 @@ export default class Product {
     const joi = Joi.getInstance();
     await joi.saveProductsSchema.validateAsync(productsInput[accountNumber]);
 
-    const uniqueProducts = new UniqueProducts(productsInput, accountNumber);
+    const uniqueProducts = new UniqueProducts(
+      productsInput,
+      accountNumber,
+      request.user
+    );
 
     const overview = await uniqueProducts.save();
     uniqueProducts.saveAccount();
@@ -25,14 +29,13 @@ export default class Product {
     response.send(overview);
   }
 
-  static async getTodayProducts(
-    _: Request,
-    response: Response,
-    _2: NextFunction
-  ) {
-    const products = await ProductService.getTodayProducts();
+  static async getTodayProducts(request, response: Response, _: NextFunction) {
+    const user = request.user;
+    const products = await ProductService.getTodayProducts(user.role, user._id);
 
-    response.send(products);
+    if (products.length == 0) products.push(ProductService.setIntialCounter());
+
+    response.send(products[0]);
   }
   static async getPendingProducts(
     _: Request,

@@ -1,8 +1,9 @@
 import { verify } from "jsonwebtoken";
 import { getUserByToken } from "../services/cache";
 import AppError from "../utils/appError";
+import catchAsync from "../utils/catchAsync";
 
-const auth = async (request, _, next) => {
+export const auth = catchAsync(async (request, _, next) => {
   const token = request.signedCookies.token;
 
   if (!token) throw new AppError("Invalid token. Please log in again!", 401);
@@ -16,6 +17,4 @@ const auth = async (request, _, next) => {
   request.user = JSON.parse(user);
 
   next();
-};
-
-export default auth;
+});

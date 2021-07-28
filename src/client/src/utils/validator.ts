@@ -10,9 +10,9 @@ export const isDate = (date: string) => {
 };
 
 export const validateInput = (input: string, textArea: string = "default") => {
-  if (!input) throw Error("Account no. required.");
+  if (!input) throw Error("Account required.");
 
-  if (!+input) throw Error("Account no. accepts only numbers.");
+  if (!+input) throw Error("Account accepts only numbers.");
 
   if (!textArea) throw Error("Textarea required.");
 };

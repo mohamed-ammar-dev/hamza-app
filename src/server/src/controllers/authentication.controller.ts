@@ -29,7 +29,7 @@ export default class Authntication {
 
     const user = await UserService.findByCredentials(data.email, data.password);
 
-    user._id = user.toString();
+    user._id = user._id.toString();
 
     const token = await UserService.generateAuthToken(user._id);
 
@@ -37,10 +37,11 @@ export default class Authntication {
 
     response.cookie("token", token, {
       signed: true,
-      maxAge: 60 * 60 * 1000 * 2,
+      maxAge: 86400000 * 2,
       httpOnly: true,
     });
-    response.cookie("logged_in", "yes", { maxAge: 60 * 60 * 1000 * 2 });
+    response.cookie("logged_in", "yes", { maxAge: 86400000 * 2 });
+    response.cookie("role", user.role, { maxAge: 86400000 * 2 });
 
     response.send({ token });
   }

@@ -42,7 +42,7 @@
   left: 0;
   background: var(--white);
   border-radius: 0.25rem;
-  width: 40%;
+  width: 60%;
   height: 100vh;
   opacity: 0;
   -webkit-animation: slideInFromLeft 1000ms cubic-bezier(0.075, 0.82, 0.165, 1);
@@ -141,6 +141,22 @@ main {
   padding: 0.5rem 1rem;
   background-color: var(--red);
   color: var(--white);
+  width: auto;
+  height: auto;
+}
+
+button:disabled,
+button[disabled] {
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+}
+
+#accounts-id-table .btn:hover {
+  background-color: var(--redBg);
 }
 
 .btn:hover {
@@ -283,7 +299,7 @@ table tbody tr:last-child {
   color: var(--white);
   line-height: 1.2;
   font-weight: normal;
-  width: 25vw;
+  width: 20vw;
   min-width: 100px;
 }
 
@@ -304,7 +320,7 @@ tbody tr:hover {
 }
 
 table .column3 {
-  width: 20vw;
+  width: 25vw;
   min-width: 100px;
   text-align: center;
 }

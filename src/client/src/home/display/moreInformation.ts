@@ -18,16 +18,16 @@ export class MoreInformation extends Tables {
       const element = products[i];
 
       const tr = document.createElement("tr");
-      const tdAutoNumber = document.createElement("td");
-      const tdName = document.createElement("td");
+      const tdUsername = document.createElement("td");
+      const tdProduct = document.createElement("td");
       const tdQuantity = document.createElement("td");
       const tdTotal = document.createElement("td");
 
-      tdAutoNumber.classList.add("column3");
-      tdAutoNumber.innerHTML = i.toString();
+      tdUsername.classList.add("column3");
+      tdUsername.innerHTML = element.username;
 
-      tdName.classList.add("column3");
-      tdName.innerHTML = element._id;
+      tdProduct.classList.add("column3");
+      tdProduct.innerHTML = element.product;
 
       tdQuantity.classList.add("column3");
       tdQuantity.innerHTML = element.items.toString();
@@ -36,8 +36,8 @@ export class MoreInformation extends Tables {
       tdTotal.innerHTML = `${element.totalPrice}$`;
 
       tb.appendChild(tr);
-      tr.appendChild(tdAutoNumber);
-      tr.appendChild(tdName);
+      tr.appendChild(tdUsername);
+      tr.appendChild(tdProduct);
       tr.appendChild(tdQuantity);
       tr.appendChild(tdTotal);
     }

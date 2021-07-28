@@ -3,7 +3,7 @@ import { converter } from "../interfaces/interfaces";
 import { Notifications } from "../../utils/notifications";
 
 export abstract class Template extends Notifications {
-  constructor(private button: HTMLButtonElement) {
+  constructor(private button?: Element) {
     super();
     this.configure();
   }
@@ -14,14 +14,14 @@ export abstract class Template extends Notifications {
   abstract display(response: Response | void): void;
 
   private configure() {
-    this.button.addEventListener("click", async () => this.handler());
+    this.button?.addEventListener("click", async () => this.handler());
   }
 
   private handler() {
     this.run();
   }
 
-  protected async run() {
+  async run() {
     try {
       const data = this.preRequest();
       const response = await this.request(data);

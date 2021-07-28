@@ -7,12 +7,14 @@ export type accounts = Array<{
   price: number;
   accountNumber: number;
   date: string;
+  username: string;
 }>;
 
 export type productDetails = Array<{
-  _id: string;
+  username: string;
   items: number;
   totalPrice: number;
+  product: string;
 }>;
 
 export type displayObject = { display(products: any): void };

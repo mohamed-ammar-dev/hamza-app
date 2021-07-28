@@ -1,6 +1,8 @@
 import { Product } from "../models/products";
 import { getDate, getNow } from "../utils/date";
-import { product } from "../interfaces/Interfaces";
+import { product, ROLE } from "../interfaces/Interfaces";
+import { ObjectId } from "mongodb";
+import ProductServiceAdmin from "./productService.admin";
 
 export default class ProductService {
   static async getAllProducts() {
@@ -13,16 +15,20 @@ export default class ProductService {
     });
   }
 
-  static async getTodayProducts() {
+  static async getTodayProducts(role: string, user_id: string) {
     const [start, end] = getDate();
 
-    const products = await Product.aggregate([
+    if (role == ROLE.ADMIN)
+      return await ProductServiceAdmin.getTodayProducts(start, end);
+
+    return await Product.aggregate([
       {
         $match: {
           date: {
             $gte: start,
             $lt: end,
           },
+          user_id: new ObjectId(user_id),
         },
       },
       {
@@ -33,9 +39,6 @@ export default class ProductService {
         },
       },
     ]).toArray();
-
-    if (products.length == 0) products.push(this.setIntialCounter());
-    return products[0];
   }
 
   static async getAllPendingProducts() {
@@ -61,20 +64,39 @@ export default class ProductService {
   }
 
   static async getMoreInformationProducts() {
-    const products = await Product.aggregate([
+    return await Product.aggregate([
       {
         $match: { isDownloaded: false },
       },
       {
         $group: {
-          _id: "$productName",
+          _id: {
+            user: "$user_id",
+            product: "$productName",
+          },
           totalPrice: { $sum: "$productPrice" },
           items: { $sum: 1 },
         },
       },
+      {
+        $lookup: {
+          from: "users",
+          localField: "_id.user",
+          foreignField: "_id",
+          as: "user",
+        },
+      },
+      {
+        $project: {
+          username: "$user.username",
+          totalPrice: 1,
+          items: 1,
+          product: "$_id.product",
+          _id: 0,
+        },
+      },
+      { $sort: { username: 1 } },
     ]).toArray();
-
-    return products;
   }
 
   static async updateProducts() {
@@ -84,8 +106,13 @@ export default class ProductService {
     );
   }
 
-  static async saveProduct(data: product, accountNumber: string) {
+  static async saveProduct(
+    data: product,
+    accountNumber: string,
+    user_id: ObjectId
+  ) {
     return await Product.insertOne({
+      user_id: new ObjectId(user_id),
       productName: data.productName,
       voucherCode: data.voucherCode,
       productPrice: +data.productPrice,

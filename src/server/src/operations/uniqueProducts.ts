@@ -6,7 +6,7 @@ import { Counter } from "./counter";
 export class UniqueProducts {
   private counterObj: Counter;
 
-  constructor(private inputs, private accountNumber) {
+  constructor(private inputs, private accountNumber, private user) {
     this.counterObj = new Counter();
   }
 
@@ -23,7 +23,12 @@ export class UniqueProducts {
         parallel([
           () =>
             this.counterObj.update(product.productName, product.productPrice),
-          () => ProductService.saveProduct(product, this.accountNumber),
+          () =>
+            ProductService.saveProduct(
+              product,
+              this.accountNumber,
+              this.user._id
+            ),
         ]);
       }
     }
@@ -33,6 +38,6 @@ export class UniqueProducts {
   saveAccount() {
     const overview = this.counterObj.overview;
     if (overview.items != 0)
-      new Account(this.accountNumber, overview.totalPrice);
+      new Account(this.accountNumber, overview.totalPrice, this.user.username);
   }
 }

@@ -1,10 +1,14 @@
+import { getCookie } from "../../utils/cookies";
 import { formatAMPM } from "../../utils/date";
 import { accounts } from "../interfaces/interfaces";
+import { DeleteAccount } from "../operations/deleteAccount";
 import { Tables } from "./tables";
 
 export class Accounts extends Tables {
+  role: string;
   constructor() {
     super(document.querySelector(".accounts-id-nav")!);
+    this.role = getCookie("role");
   }
 
   display(products: accounts): void {
@@ -24,6 +28,7 @@ export class Accounts extends Tables {
       const tdTime = document.createElement("td");
       const price = document.createElement("td");
       const tdAccountID = document.createElement("td");
+      const tdUsername = document.createElement("td");
       const tdDelete = document.createElement("td");
       const deleteBtn = document.createElement("button");
 
@@ -39,38 +44,31 @@ export class Accounts extends Tables {
       tdAccountID.classList.add("column3");
       tdAccountID.innerHTML = element.accountNumber.toString();
 
+      tdUsername.classList.add("column3");
+      tdUsername.innerHTML = element.username;
+
       tdDelete.classList.add("column3");
-      deleteBtn.classList.add("delete-btn");
+
+      if (this.role == "user") deleteBtn.disabled = true;
+      if (this.role == "admin") {
+        deleteBtn.classList.add("btn");
+        deleteBtn.setAttribute("id", element._id);
+      }
       deleteBtn.innerHTML = "remove";
-      deleteBtn.setAttribute("id", element._id);
 
       tb.appendChild(tr);
       tr.appendChild(tdDate);
       tr.appendChild(tdTime);
-      tr.appendChild(price);
+      tr.appendChild(tdUsername);
       tr.appendChild(tdAccountID);
+      tr.appendChild(price);
       tr.appendChild(tdDelete);
-      tdDelete.appendChild(deleteBtn);
 
+      tdDelete.appendChild(deleteBtn);
       tdDelete.addEventListener("click", () => {
-        this.deleteRequest(deleteBtn.getAttribute("id")!);
+        new DeleteAccount(deleteBtn.getAttribute("id")!).run();
         tr.remove();
       });
-    }
-  }
-
-  private async deleteRequest(account_id: string) {
-    try {
-      const url = "/accounts";
-      await fetch(url, {
-        method: "DELETE",
-        body: JSON.stringify({ account_id }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-    } catch (error) {
-      console.log(error);
     }
   }
 }

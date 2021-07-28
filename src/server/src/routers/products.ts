@@ -1,37 +1,36 @@
 import { Router } from "express";
 import ProductController from "../controllers/products.controller";
-import auth from "../middlewares/auth";
+import { ROLE } from "../interfaces/Interfaces";
+import { restrictTo } from "../middlewares/admin";
+import { auth } from "../middlewares/auth";
 import catchAsync from "../utils/catchAsync";
 
 const products = Router();
 
 products.post(
   "/upload",
-  catchAsync(auth),
+  auth,
   catchAsync(ProductController.saveUniqueProducts)
 );
 
-products.get(
-  "/today",
-  catchAsync(auth),
-  catchAsync(ProductController.getTodayProducts)
-);
+products.get("/today", auth, catchAsync(ProductController.getTodayProducts));
 
 products.get(
   "/pending",
-  catchAsync(auth),
+  auth,
   catchAsync(ProductController.getPendingProducts)
 );
 
 products.get(
   "/pending/more-info",
-  catchAsync(auth),
+  auth,
   catchAsync(ProductController.moreInformationProducts)
 );
 
 products.get(
   "/pending/download",
-  catchAsync(auth),
+  auth,
+  restrictTo(ROLE.ADMIN),
   catchAsync(ProductController.downloadPendingProducts)
 );
 

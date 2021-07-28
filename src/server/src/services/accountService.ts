@@ -22,18 +22,27 @@ export default class ProductService {
     }).toArray();
   }
 
-  static async saveAccount(accountNumber: string, price: number) {
+  static async saveAccount(
+    accountNumber: string,
+    price: number,
+    username: string
+  ) {
     return await Account.insertOne({
+      username,
       accountNumber,
       price,
       date: getNow(),
     });
   }
 
-  static async updateAccount(accountNumber: string, price: number) {
+  static async updateAccount(
+    accountNumber: string,
+    price: number,
+    username: string
+  ) {
     await Account.updateOne(
       { accountNumber },
-      { $set: { date: getNow(), price } }
+      { $set: { date: getNow(), price, username } }
     );
   }
 
