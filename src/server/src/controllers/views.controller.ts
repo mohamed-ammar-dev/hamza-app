@@ -7,4 +7,7 @@ export default class Views {
   static async renderLogin(_: Request, response: Response) {
     response.render("login.hbs");
   }
+  static async renderForgotPassword(_: Request, response: Response) {
+    response.render("forgotPassword.hbs");
+  }
 }
