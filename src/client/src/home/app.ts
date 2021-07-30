@@ -6,6 +6,9 @@ import { Accounts } from "./products/accounts";
 import { Search } from "./operations/search";
 import { Download } from "./operations/download";
 import { Converter } from "./operations/converter";
+import "../../css/shared.css";
+import "../../css/home.css";
+import { NotificationComponent } from "../components/notification";
 
 if (!document.cookie) document.location.href = "/";
 
@@ -18,3 +21,5 @@ new Accounts();
 new Search();
 new Download();
 new Converter();
+
+new NotificationComponent().render();

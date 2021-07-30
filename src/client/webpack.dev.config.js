@@ -1,4 +1,5 @@
 const path = require("path");
+var autoprefixer = require("autoprefixer");
 const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
@@ -22,22 +23,30 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: /\.(png|svg)$/,
+        test: /\.(png)$/,
         loader: "image-webpack-loader",
         enforce: "pre",
       },
       {
-        test: /\.(png|mp3|svg)$/,
+        test: /\.(png|svg)$/,
         loader: "url-loader",
         options: {
-          // Images larger than 25 KB won’t be inlined
+          // files larger than 25 KB won’t be inlined
           limit: 25 * 1024,
         },
+      },
+      {
+        test: /\.mp3$/,
+        loader: "file-loader",
+      },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader", "postcss-loader"],
       },
     ],
   },
   plugins: [new TerserPlugin()],
   resolve: {
-    extensions: [".ts", ".js"],
+    extensions: [".ts", ".js", ".css", ".mp3"],
   },
 };
