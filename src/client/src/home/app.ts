@@ -16,10 +16,9 @@ new Images().render();
 
 Promise.all([new TodayProducts().run(), new PendingProducts().run()]);
 
+new NotificationComponent().render();
 new MoreInformation();
 new Accounts();
 new Search();
 new Download();
 new Converter();
-
-new NotificationComponent().render();

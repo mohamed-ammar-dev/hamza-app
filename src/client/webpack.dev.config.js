@@ -47,6 +47,6 @@ module.exports = {
   },
   plugins: [new TerserPlugin()],
   resolve: {
-    extensions: [".ts", ".js", ".css", ".mp3"],
+    extensions: [".ts", ".js", ".css"],
   },
 };
