@@ -1,11 +1,11 @@
 const path = require("path");
-var autoprefixer = require("autoprefixer");
-const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
   entry: {
     home: "./src/client/src/home/app.ts",
     login: "./src/client/src/login/app.ts",
+    error: "./src/client/src/error/app.ts",
+    forgotPassword: "./src/client/src/forgotPassword/app.ts",
   },
 
   output: {
@@ -45,7 +45,6 @@ module.exports = {
       },
     ],
   },
-  plugins: [new TerserPlugin()],
   resolve: {
     extensions: [".ts", ".js", ".css"],
   },

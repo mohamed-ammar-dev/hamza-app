@@ -1,11 +1,14 @@
 const path = require("path");
 const TerserPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
 module.exports = {
   entry: {
     home: "./src/client/src/home/app.ts",
     login: "./src/client/src/login/app.ts",
+    error: "./src/client/src/error/app.ts",
+    forgotPassword: "./src/client/src/forgotPassword/app.ts",
   },
 
   output: {
@@ -16,6 +19,7 @@ module.exports = {
 
   mode: "production",
   optimization: {
+    minimizer: [new CssMinimizerPlugin()],
     splitChunks: {
       chunks: "all",
     },

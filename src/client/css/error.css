@@ -1,9 +1,3 @@
-@font-face {
-  font-family: "Roboto";
-  font-weight: normal;
-  src: url("../font/roboto-regular.ttf");
-}
-html,
 body {
   background: #edf2f5;
   font-family: "Roboto";
