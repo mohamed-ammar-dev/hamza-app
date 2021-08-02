@@ -25,3 +25,11 @@ export const validateLogin = (username: string, password: string) => {
 export const validateEmail = (email: string) => {
   if (!email) throw Error("Email required.");
 };
+
+export const validatResetPassword = (password: string, password2: string) => {
+  if (!password) throw Error("New password required.");
+  if (!password2) throw Error("Confirmation password required.");
+
+  if (password != password2)
+    throw Error("The password confirmation does not match.");
+};

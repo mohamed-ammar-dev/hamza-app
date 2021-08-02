@@ -1,13 +1,15 @@
 import { Notifications } from "../utils/notifications";
-import { validateEmail } from "../utils/validator";
+import { validatResetPassword } from "../utils/validator";
 
 export class ResetPassword extends Notifications {
-  private email: HTMLInputElement;
+  private password: HTMLInputElement;
+  private password2: HTMLInputElement;
   private button: HTMLButtonElement;
 
   constructor() {
     super();
-    this.email = document.querySelector("#email")!;
+    this.password = document.querySelector("#password")!;
+    this.password2 = document.querySelector("#password2")!;
     this.button = document.querySelector(".btn")!;
     this.configure();
   }
@@ -23,20 +25,27 @@ export class ResetPassword extends Notifications {
   }
 
   preRequest() {
-    const emailValue = this.email.value.trim();
+    const passwordlValue = this.password.value.trim();
+    const password2lValue = this.password2.value.trim();
 
-    validateEmail(emailValue);
-    return emailValue;
+    this.clearText();
+
+    validatResetPassword(passwordlValue, password2lValue);
+    return { password: passwordlValue };
   }
 
-  async request(email: string) {
-    const url = `/password/token/${email}`;
-    return await fetch(url);
+  async request(password: object) {
+    const url = `/password/reset/${this.extractToken()}`;
+    return await fetch(url, {
+      method: "POST",
+      body: JSON.stringify(password),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
   }
 
   async operation(response: Response) {
-    this.clearText();
-
     if (response.ok)
       return this.notification(
         `Check your inbox for the next steps. 
@@ -50,7 +59,8 @@ export class ResetPassword extends Notifications {
   }
 
   clearText() {
-    this.email.value = "";
+    this.password.value = "";
+    this.password2.value = "";
   }
 
   private configure() {
@@ -64,5 +74,14 @@ export class ResetPassword extends Notifications {
 
   private handler() {
     this.run();
+  }
+
+  private extractToken() {
+    const url = new URL(location.href);
+    const token = url.searchParams.get("token");
+
+    if (!token) throw new Error("Invalid request.");
+
+    return token;
   }
 }

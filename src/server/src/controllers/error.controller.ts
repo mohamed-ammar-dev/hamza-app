@@ -2,8 +2,10 @@ import { Response } from "express";
 import AppError from "../utils/appError";
 import { error } from "../interfaces/Interfaces";
 
-const handleJWTError = () =>
-  new AppError("Invalid token. Please log in again!", 401);
+const handleJWTError = () => new AppError("Invalid token.", 401);
+
+const handleJWTExpiredError = () =>
+  new AppError("Your token has expired!", 401);
 
 const sendErrorDev = (err: error, res: Response) => {
   res.status(err.statusCode).json({
@@ -39,6 +41,7 @@ export = (err: error, _, res: Response, _2) => {
   if (process.env.NODE_ENV === "development") return sendErrorDev(err, res);
 
   if (err.name === "JsonWebTokenError") (err as AppError) = handleJWTError();
-
+  if (err.name === "TokenExpiredError")
+    (err as AppError) = handleJWTExpiredError();
   sendErrorProd(err, res);
 };

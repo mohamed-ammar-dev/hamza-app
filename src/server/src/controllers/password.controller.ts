@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { forgotPassword } from "../emails/emails";
 import AuthenticationService from "../services/authenticationService";
 import {
+  clearAllTokens,
   getResetPasswordToken,
   saveResetPasswordToken,
 } from "../services/cache";
@@ -10,8 +11,9 @@ import AppError from "../utils/appError";
 
 export default class Password {
   static async generateToken(request: Request, response: Response) {
-    //check email
-    const email = request.params.email;
+    const { email } = request.params;
+
+    if (!email) throw new AppError("Email required.", 400);
 
     const user = await UserService.findUserByEmail(email);
 
@@ -30,9 +32,10 @@ export default class Password {
     response.send();
   }
   static async resetPassword(request: Request, response: Response) {
-    //check password and token
     const { password } = request.body;
-    const token = request.params.token;
+    const { token } = request.params;
+
+    if (!password || !token) throw new AppError("Invalid request.", 400);
 
     const decode = await AuthenticationService.verifyToken(token);
 
@@ -42,9 +45,8 @@ export default class Password {
 
     UserService.updatePassword(decode._id, password);
 
+    clearAllTokens(decode._id);
+
     response.send();
-  }
-  static async renderForgotPassword(_: Request, response: Response) {
-    response.render("forgotPassword.hbs");
   }
 }

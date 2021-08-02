@@ -5,6 +5,6 @@ import catchAsync from "../utils/catchAsync";
 const password = Router();
 
 password.get("/token/:email", catchAsync(PasswordController.generateToken));
-password.post("/forgot/:token", catchAsync(PasswordController.resetPassword));
+password.post("/reset/:token", catchAsync(PasswordController.resetPassword));
 
 export default password;

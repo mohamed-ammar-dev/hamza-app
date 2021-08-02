@@ -36,14 +36,13 @@ export class Login extends Notifications {
 
   async request(data: login) {
     const url = "/auth/login";
-    const response = await fetch(url, {
+    return await fetch(url, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
       },
     });
-    return response;
   }
 
   async operation(response: Response) {

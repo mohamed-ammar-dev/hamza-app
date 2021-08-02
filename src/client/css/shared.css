@@ -41,7 +41,6 @@ img {
   border: none;
   cursor: pointer;
   animation: wiggle 300ms 2s 3;
-  box-shadow: 1px 1px 1px 2px var(--shadow);
   width: 100%;
 }
 
