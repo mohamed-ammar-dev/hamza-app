@@ -11,8 +11,8 @@ export function forgotPassword(to, domain, token) {
     },
     templateId: "d-2c831ef5bdb9417685688953817a90cf",
     dynamicTemplateData: {
-      link: `https://${domain}.com/password/reset?token=${token}`,
-      domain: `https://${domain}.com`,
+      link: `https://${domain}/password/reset?token=${token}`,
+      domain: `https://${domain}`,
     },
   });
 }
