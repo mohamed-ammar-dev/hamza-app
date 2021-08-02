@@ -18,7 +18,10 @@ export const validateInput = (input: string, textArea: string = "default") => {
 };
 
 export const validateLogin = (username: string, password: string) => {
-  if (!username) throw Error("Email required.");
-
+  validateEmail(username);
   if (!password) throw Error("Password required.");
+};
+
+export const validateEmail = (email: string) => {
+  if (!email) throw Error("Email required.");
 };

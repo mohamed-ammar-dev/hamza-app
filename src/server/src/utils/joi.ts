@@ -31,7 +31,7 @@ export class Joi {
 
   private signUp() {
     return object({
-      username: string().alphanum().min(3).max(30).required(),
+      username: string().min(3).max(30).required(),
 
       email: string()
         .email({
@@ -53,7 +53,7 @@ export class Joi {
         })
         .required(),
 
-      password: string().min(6).max(30).required(),
+      password: string().required(),
     });
   }
 

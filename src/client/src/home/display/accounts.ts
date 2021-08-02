@@ -53,6 +53,10 @@ export class Accounts extends Tables {
       if (this.role == "admin") {
         deleteBtn.classList.add("btn");
         deleteBtn.setAttribute("id", element._id);
+        deleteBtn.addEventListener("click", () => {
+          new DeleteAccount(deleteBtn.getAttribute("id")!).run();
+          tr.remove();
+        });
       }
       deleteBtn.innerHTML = "remove";
 
@@ -65,10 +69,6 @@ export class Accounts extends Tables {
       tr.appendChild(tdDelete);
 
       tdDelete.appendChild(deleteBtn);
-      tdDelete.addEventListener("click", () => {
-        new DeleteAccount(deleteBtn.getAttribute("id")!).run();
-        tr.remove();
-      });
     }
   }
 }

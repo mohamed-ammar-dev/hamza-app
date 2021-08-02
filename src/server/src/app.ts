@@ -13,7 +13,7 @@ import routerAuthentication from "./routers/authentication";
 import routerProducts from "./routers/products";
 import routerAccounts from "./routers/accounts";
 import routerViews from "./routers/views";
-// import AppError from "./utils/appError";
+import routerPassword from "./routers/password";
 import globalErrorHandler from "./controllers/error.controller";
 
 export const app = express();
@@ -56,10 +56,10 @@ app.use(limiterApi);
 app.use("/", routerViews);
 app.use("/products", routerProducts);
 app.use("/accounts", routerAccounts);
+app.use("/password", routerPassword);
 
 app.all("*", (_: Request, res, _2: NextFunction) => {
-  // next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
-  res.render("error.hbs");
+  res.status(404).render("error.hbs");
 });
 
 app.use(globalErrorHandler);

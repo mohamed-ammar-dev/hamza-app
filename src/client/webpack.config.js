@@ -9,6 +9,7 @@ module.exports = {
     login: "./src/client/src/login/app.ts",
     error: "./src/client/src/error/app.ts",
     forgotPassword: "./src/client/src/forgotPassword/app.ts",
+    resetPassword: "./src/client/src/resetPassword/app.ts",
   },
 
   output: {

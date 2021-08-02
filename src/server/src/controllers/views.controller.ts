@@ -10,4 +10,7 @@ export default class Views {
   static async renderForgotPassword(_: Request, response: Response) {
     response.render("forgotPassword.hbs");
   }
+  static async renderResetPassword(_: Request, response: Response) {
+    response.render("resetPassword.hbs");
+  }
 }

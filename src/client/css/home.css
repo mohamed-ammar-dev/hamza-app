@@ -92,12 +92,16 @@ main {
 }
 
 .account-id input::placeholder {
-  font-size: 0.9rem;
-  color: #888;
+  font-size: 0.8rem;
+  color: #b3b3b3;
 }
 
 .account-id input:focus {
   outline: none;
+}
+
+.account-id input:focus::placeholder {
+  color: #888;
 }
 
 .account-id img {
@@ -319,4 +323,14 @@ table .column3 {
   width: 25vw;
   min-width: 100px;
   text-align: center;
+}
+
+.logout {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+}
+
+.logout:hover {
+  cursor: pointer;
 }

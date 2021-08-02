@@ -9,8 +9,12 @@ import { Converter } from "./operations/converter";
 import "../../css/shared.css";
 import "../../css/home.css";
 import { NotificationComponent } from "../components/notification";
+import { getCookie } from "../utils/cookies";
+import { Logout } from "./operations/logout";
 
 if (!document.cookie) document.location.href = "/";
+
+document.title = `${getCookie("user")} | Hamza App`;
 
 new Images().render();
 
@@ -22,3 +26,4 @@ new Accounts();
 new Search();
 new Download();
 new Converter();
+new Logout();

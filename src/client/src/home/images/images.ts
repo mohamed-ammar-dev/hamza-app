@@ -7,6 +7,7 @@ import Search from "../../../images/search.png";
 import Time from "../../../images/time.png";
 import Today from "../../../images/today.png";
 import Account from "../../../images/account.png";
+import Logout from "../../../images/logout.png";
 
 export class Images {
   private search: HTMLImageElement;
@@ -18,6 +19,7 @@ export class Images {
   private cart: NodeListOf<HTMLImageElement>;
   private link: HTMLLinkElement;
   private account: HTMLImageElement;
+  private logout: HTMLImageElement;
 
   constructor() {
     this.search = document.querySelector("#search-icon")!;
@@ -28,6 +30,7 @@ export class Images {
     this.price = document.querySelectorAll("#price-icon")!;
     this.cart = document.querySelectorAll("#cart-icon")!;
     this.account = document.querySelector("#account-icon")!;
+    this.logout = document.querySelector(".logout")!;
     this.link = document.querySelector("link[rel~='icon']")!;
   }
 
@@ -41,6 +44,7 @@ export class Images {
     this.addInfoIcon();
     this.addCartIcon();
     this.addPriceIcon();
+    this.addLogoutIcon();
   }
 
   private addFavIcon() {
@@ -49,6 +53,10 @@ export class Images {
     document.getElementsByTagName("head")[0].appendChild(this.link);
 
     this.link.href = FavIcon;
+  }
+
+  private addLogoutIcon() {
+    this.logout.src = Logout;
   }
 
   private addSearchIcon() {

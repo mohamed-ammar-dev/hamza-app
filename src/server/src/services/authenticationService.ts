@@ -2,7 +2,7 @@ import { ROLE } from "../interfaces/Interfaces";
 import { User } from "../models/users";
 import UserService from "./userService";
 import { hash, compare } from "bcryptjs";
-import { sign } from "jsonwebtoken";
+import { sign, verify } from "jsonwebtoken";
 import AppError from "../utils/appError";
 
 export default class AuthenticationService {
@@ -13,9 +13,13 @@ export default class AuthenticationService {
   }
 
   static async createUser(user) {
-    user.password = await hash(user.password, 10);
+    user.password = await this.hashPassword(user.password);
 
     await User.insertOne({ ...user, role: ROLE.USER });
+  }
+
+  static async hashPassword(password) {
+    return await hash(password, 10);
   }
 
   static async findByCredentials(email, password) {
@@ -29,7 +33,13 @@ export default class AuthenticationService {
     return user;
   }
 
-  static async generateAuthToken(_id) {
-    return sign({ _id }, process.env.JWT_PRIVATE_KEY);
+  static async generateAuthToken(_id, expiresIn) {
+    return sign({ _id }, process.env.JWT_PRIVATE_KEY, { expiresIn });
+  }
+
+  static async verifyToken(token) {
+    if (!token) throw new AppError("Invalid token. Please log in again!", 401);
+
+    return verify(token, process.env.JWT_PRIVATE_KEY);
   }
 }
