@@ -31,6 +31,8 @@
   opacity: 0;
   animation: slideInFromRight 1000ms cubic-bezier(0.075, 0.82, 0.165, 1);
   transition: all 1s ease;
+  border-bottom-left-radius: 20px;
+  border-top-left-radius: 20px;
 }
 
 .accounts-id-nav {
@@ -46,6 +48,8 @@
   opacity: 0;
   animation: slideInFromLeft 1000ms cubic-bezier(0.075, 0.82, 0.165, 1);
   transition: all 1s ease;
+  border-bottom-right-radius: 20px;
+  border-top-right-radius: 20px;
 }
 
 main {
@@ -268,11 +272,20 @@ table {
   border-spacing: 1;
   border-collapse: collapse;
   background: var(--white);
-  border-radius: 10px;
   overflow: hidden;
   width: 100%;
   position: relative;
   table-layout: fixed;
+}
+
+#accounts-id-table {
+  border-bottom-right-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+#more-information-table {
+  border-bottom-left-radius: 20px;
+  border-top-left-radius: 20px;
 }
 
 table thead tr {
@@ -304,19 +317,19 @@ table tbody tr:last-child {
 }
 
 tbody tr:nth-child(even) {
-  background-color: var(--shadow);
+  background-color: #e8e6fb;
 }
 
 tbody tr {
   font-size: 0.9rem;
-  color: var(--mainText);
+  color: #888;
   line-height: 1.2;
   font-weight: normal;
 }
 
 tbody tr:hover {
-  color: #555555;
-  background-color: #f5f5f5;
+  color: var(--mainText);
+  background-color: #e1defc;
 }
 
 table .column3 {
@@ -333,4 +346,28 @@ table .column3 {
 
 .logout:hover {
   cursor: pointer;
+}
+
+.tooltip {
+  position: fixed;
+  top: 0.75rem;
+  right: 9rem;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 90px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 3;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
 }

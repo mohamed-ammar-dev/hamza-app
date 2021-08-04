@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <title>Hamza App - Sign Up</title>
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="../css/signUp.css">
+</head>
+
+<body>
+
+    <div class="main">
+
+        <!-- Sign up form -->
+        <section class="signup">
+            <div class="container">
+                <div class="signup-form">
+                    <h2 class="form-title">Sign up</h2>
+                    <form method="POST" class="register-form" id="register-form">
+                        <div class="form-group">
+                            <img id="user-icon" />
+                            <input type="text" name="name" id="name" placeholder="Name" />
+                        </div>
+                        <div class="form-group">
+                            <img id="email-icon" />
+                            <input type="email" name="email" id="email" placeholder="Email" />
+                        </div>
+                        <div class="form-group">
+                            <img id="lock-icon" />
+                            <input type="password" name="pass" id="pass" placeholder="Password" />
+                        </div>
+                        <div class="form-group">
+                            <img id="password2-icon" />
+                            <input type="password" name="re_pass" id="re_pass" placeholder="Repeat your password" />
+                        </div>
+                    </form>
+                    <div class="form-button">
+                        <input type="button" name="signup" id="signup" class="form-submit" value="Register" />
+                    </div>
+                </div>
+                <div class="signup-image">
+                    <figure><img alt="sing up image"></figure>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- JS -->
+    <script type="module" src="../build/signUp.js"></script>
+</body>
+
+</html>

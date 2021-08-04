@@ -2,8 +2,8 @@
   --blocks: #9993fd;
   --mainText: #575a89;
   --shadow: #edf2f5;
-  --white: #f8fafb;
-  --black: #21364b;
+  --white: #f8f8f8;
+  --black: #4a648e;
   --background: #8b85ff;
   --red: #c33625;
   --redBg: #a30000;
@@ -22,6 +22,7 @@ body {
   height: 100%;
   overflow: hidden;
   line-height: 1.5;
+  background-color: var(--white);
 }
 
 img {

@@ -4,6 +4,9 @@ export default class Views {
   static async renderHome(_: Request, response: Response) {
     response.render("home.hbs");
   }
+  static async renderSignUp(_: Request, response: Response) {
+    response.render("signUp.hbs");
+  }
   static async renderLogin(_: Request, response: Response) {
     response.render("login.hbs");
   }

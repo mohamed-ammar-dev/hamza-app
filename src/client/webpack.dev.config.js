@@ -1,9 +1,11 @@
 const path = require("path");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   entry: {
     home: "./src/client/src/home/app.ts",
     login: "./src/client/src/login/app.ts",
+    signUp: "./src/client/src/signUp/app.ts",
     error: "./src/client/src/error/app.ts",
     forgotPassword: "./src/client/src/forgotPassword/app.ts",
     resetPassword: "./src/client/src/resetPassword/app.ts",
@@ -42,10 +44,12 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader", "postcss-loader"],
+        use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
       },
     ],
   },
+  plugins: [new MiniCssExtractPlugin()],
+
   resolve: {
     extensions: [".ts", ".js", ".css"],
   },

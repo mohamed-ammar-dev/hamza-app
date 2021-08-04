@@ -5,6 +5,7 @@ import catchAsync from "../utils/catchAsync";
 const views = Router();
 
 views.get("/", catchAsync(ViewsController.renderLogin));
+views.get("/signup", catchAsync(ViewsController.renderSignUp));
 views.get("/home", catchAsync(ViewsController.renderHome));
 views.get("/password/forgot", catchAsync(ViewsController.renderForgotPassword));
 views.get("/password/reset", catchAsync(ViewsController.renderResetPassword));

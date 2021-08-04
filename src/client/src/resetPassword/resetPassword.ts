@@ -46,13 +46,12 @@ export class ResetPassword extends Notifications {
   }
 
   async operation(response: Response) {
-    if (response.ok)
-      return this.notification(
-        `Check your inbox for the next steps. 
-        If you don't receive an email, 
-        and it's not in your spam folder 
-        this could mean you signed up with a different address.`
-      );
+    if (response.ok) {
+      setTimeout(() => {
+        location.href = "/";
+      }, 5000);
+      return this.notification(`Your password has been saved.`);
+    }
 
     const error = await response.json();
     throw new Error(error.message);
