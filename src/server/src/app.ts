@@ -18,7 +18,7 @@ import globalErrorHandler from "./controllers/error.controller";
 
 export const app = express();
 
-const limiterLogin = rateLimit({
+const limiterAuth = rateLimit({
   max: 10,
   windowMs: 60 * 60 * 1000, // 1 hour to milliseconds
   message: "Too many requests from this IP, please try again in an hour!",
@@ -50,13 +50,13 @@ if (process.env.NODE_ENV === "development") {
   app.use(require("express-status-monitor")());
 }
 
-app.use("/auth", limiterLogin, routerAuthentication);
+app.use("/auth", limiterAuth, routerAuthentication);
+app.use("/password", limiterAuth, routerPassword);
 
 app.use(limiterApi);
 app.use("/", routerViews);
 app.use("/products", routerProducts);
 app.use("/accounts", routerAccounts);
-app.use("/password", routerPassword);
 
 app.all("*", (_: Request, res, _2: NextFunction) => {
   res.status(404).render("error.hbs");

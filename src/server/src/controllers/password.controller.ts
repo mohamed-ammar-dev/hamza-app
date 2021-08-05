@@ -8,6 +8,7 @@ import {
 } from "../services/cache";
 import UserService from "../services/userService";
 import AppError from "../utils/appError";
+import { Joi } from "../utils/joi";
 
 export default class Password {
   static async generateToken(request: Request, response: Response) {
@@ -31,9 +32,13 @@ export default class Password {
 
     response.send();
   }
+
   static async resetPassword(request: Request, response: Response) {
     const { password } = request.body;
     const { token } = request.params;
+
+    const joi = Joi.getInstance();
+    await joi.resetPasswordSchema.validateAsync(password);
 
     if (!password || !token) throw new AppError("Invalid request.", 400);
 

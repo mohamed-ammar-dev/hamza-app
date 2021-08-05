@@ -1,12 +1,23 @@
 import { Router } from "express";
 import AuthenticationController from "../controllers/authentication.controller";
+import { ROLE } from "../interfaces/Interfaces";
+import { restrictTo } from "../middlewares/admin";
 import { auth } from "../middlewares/auth";
 import catchAsync from "../utils/catchAsync";
 
-const accounts = Router();
+const authentication = Router();
 
-accounts.post("/signup", catchAsync(AuthenticationController.signUp));
-accounts.post("/login", catchAsync(AuthenticationController.login));
-accounts.get("/logout", auth, catchAsync(AuthenticationController.logout));
+authentication.post(
+  "/signup",
+  auth,
+  restrictTo(ROLE.ADMIN),
+  catchAsync(AuthenticationController.signUp)
+);
+authentication.post("/login", catchAsync(AuthenticationController.login));
+authentication.get(
+  "/logout",
+  auth,
+  catchAsync(AuthenticationController.logout)
+);
 
-export default accounts;
+export default authentication;

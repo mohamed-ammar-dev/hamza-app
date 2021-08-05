@@ -26,8 +26,8 @@ export class Login extends Notifications {
   }
 
   preRequest() {
-    const usernameValue = this.username.value;
-    const passwordValue = this.password.value.trim();
+    const usernameValue = this.username.value.trim();
+    const passwordValue = this.password.value;
 
     validateLogin(usernameValue, passwordValue);
 

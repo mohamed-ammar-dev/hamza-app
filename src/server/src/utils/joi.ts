@@ -14,12 +14,14 @@ export class Joi {
   accountsQuerySchema: ObjectSchema;
   signUpSchema: ObjectSchema;
   loginSchema: ObjectSchema;
+  resetPasswordSchema: ObjectSchema;
 
   private constructor() {
     this.saveProductsSchema = this.saveProducts();
     this.accountsQuerySchema = this.accountsQuery();
     this.signUpSchema = this.signUp();
     this.loginSchema = this.login();
+    this.resetPasswordSchema = this.resetPassword();
   }
 
   public static getInstance(): Joi {
@@ -54,6 +56,12 @@ export class Joi {
         .required(),
 
       password: string().required(),
+    });
+  }
+
+  private resetPassword() {
+    return object({
+      password: string().min(6).max(30).required(),
     });
   }
 

@@ -17,16 +17,31 @@ export const validateInput = (input: string, textArea: string = "default") => {
   if (!textArea) throw Error("Textarea required.");
 };
 
-export const validateLogin = (username: string, password: string) => {
-  validateEmail(username);
+export const validateSignUp = (
+  username: string,
+  email: string,
+  password: string,
+  password2: string
+) => {
+  validateUsername(username);
+  validateEmail(email);
+  validatPassword(password, password2);
+};
+
+export const validateLogin = (email: string, password: string) => {
+  validateEmail(email);
   if (!password) throw Error("Password required.");
+};
+
+export const validateUsername = (username: string) => {
+  if (!username) throw Error("Name required.");
 };
 
 export const validateEmail = (email: string) => {
   if (!email) throw Error("Email required.");
 };
 
-export const validatResetPassword = (password: string, password2: string) => {
+export const validatPassword = (password: string, password2: string) => {
   if (!password) throw Error("New password required.");
   if (!password2) throw Error("Confirmation password required.");
 

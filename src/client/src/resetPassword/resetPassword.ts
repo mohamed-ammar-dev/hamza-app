@@ -1,5 +1,5 @@
 import { Notifications } from "../utils/notifications";
-import { validatResetPassword } from "../utils/validator";
+import { validatPassword } from "../utils/validator";
 
 export class ResetPassword extends Notifications {
   private password: HTMLInputElement;
@@ -30,7 +30,7 @@ export class ResetPassword extends Notifications {
 
     this.clearText();
 
-    validatResetPassword(passwordlValue, password2lValue);
+    validatPassword(passwordlValue, password2lValue);
     return { password: passwordlValue };
   }
 
